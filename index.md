@@ -4,7 +4,7 @@ layout: home
 nav_order: 0
 ---
 
-The Climate Services Knowledge Graph is a public knowledge base containing information about climate change data, as climate models, variables, scenarios,simulations and their relationships.
+The Climate Change Knowledge Graph is a public knowledge base containing information about climate change data, as climate models, variables, scenarios,simulations and their relationships.
 
 It is accessible through standard semantic APIs: a SPARQL endpoint allowing to query the underlying data, linked data access to navigate the graph resources one at a time, and dumps of all the knowledge graph for off-line usage.
 
