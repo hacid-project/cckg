@@ -20,12 +20,12 @@ You can start by checking the [example queries](example-queries).
 All the URIs used in the knowledge graph can be dereferenced, either programmaticaly or via browser, in order to get information on that resource (namely, all triples having such resource as subject or object). This allows to navigate the knowledge graph going from one resource to another.
 
 Example resource URIs:
-- [air_temperature (CF variable)](https://w3id.org/hacid/data/cs/variable/cf/air_temperature);
-- [tasmax (MIP variable)](https://w3id.org/hacid/data/cs/variable/mip/tasmax);
-- [WSDI (Warm Spell Duration Indicator)](https://w3id.org/hacid/data/cs/climdex/index/WSDI);
-- [HadCM3 (global climate model maintained by the MetOffice, UK)](https://w3id.org/hacid/data/cs/model/HadCM3);
-- [CMIP5 global simulation using the model HadCM3 for the RCP4.5 scenario (realization 1)](https://keng.istc.cnr.it/hacid-cs-kg/id/simulation/cmip5.HadCM3.rcp45.r1i1p1.html);
-- [CORDEX regional downscaling for south-america considering the RCP8.5 scenario, using the model CanESM2 for the global simulation and the model WRF341I for downscaling](https://w3id.org/hacid/data/cs/simulation/cordex.SAM-44.CanESM2.rcp85.WRF341I.v2.r1i1p1).
+- [air_temperature (CF variable)](https://w3id.org/hacid/data/cs/variables/cf/air_temperature);
+- [tasmax (MIP variable)](https://w3id.org/hacid/data/cs/variables/mip/tasmax);
+- [WSDI (Warm Spell Duration Indicator)](https://w3id.org/hacid/data/cs/climdex/indices/WSDI);
+- [HadCM3 (global climate model maintained by the MetOffice, UK)](https://w3id.org/hacid/data/cs/models/HadCM3);
+- [CMIP5 global simulation using the model HadCM3 for the RCP4.5 scenario (realization 1)](https://keng.istc.cnr.it/hacid-cs-kg/id/simulations/cmip5.HadCM3.rcp45.r1i1p1.html);
+- [CORDEX regional downscaling for south-america considering the RCP8.5 scenario, using the model CanESM2 for the global simulation and the model WRF341I for downscaling](https://w3id.org/hacid/data/cs/simulations/cordex.SAM-44.CanESM2.rcp85.WRF341I.v2.r1i1p1).
 
 ## Download the Dumps
 
