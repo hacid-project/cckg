@@ -52,6 +52,7 @@ ORDER BY ?org ?model_type ?model
 List climate variables defined in [CF Metadata Conventions](https://cfconventions.org/) and their usage in available projections.
 
 ```sparql
+PREFIX top: <https://w3id.org/hacid/onto/top-level/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX data: <https://w3id.org/hacid/onto/data/>
 
@@ -59,13 +60,12 @@ SELECT
 	?var ?var_label ?var_descr
 	(COUNT(DISTINCT ?dataset) AS ?num_datasets_using_it)
 WHERE {
-    GRAPH <https://w3id.org/hacid/data/cs/cf> {
-        ?var a data:Variable;
-            rdfs:label ?var_label.
-        OPTIONAL {
-            ?var rdfs:comment ?var_descr.
-        }
-    }
+  	?var a data:Variable;
+  	    top:isMemberOf <https://w3id.org/hacid/data/cs/variables/cf>;
+  	    rdfs:label ?var_label.
+  	OPTIONAL {
+    	?var rdfs:comment ?var_descr.
+  	}
     OPTIONAL {
 	    ?dataset data:holdsSpecializationOfVariable* ?var
     }
@@ -80,21 +80,21 @@ ORDER BY DESC(?num_datasets_using_it) ?var
 List MIP climate variables that specialize a specific CF variable (in this example air-temperature) and their usage.
 
 ```sparql
+PREFIX top: <https://w3id.org/hacid/onto/top-level/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX data: <https://w3id.org/hacid/onto/data/>
-PREFIX cf: <https://w3id.org/hacid/data/cs/variable/cf/>
+PREFIX cf: <https://w3id.org/hacid/data/cs/variables/cf/>
 
 SELECT 
 	?var ?var_label ?var_descr
 	(COUNT(DISTINCT ?dataset) AS ?num_datasets_using_it)
 WHERE {
-    GRAPH <https://w3id.org/hacid/data/cs/cmip6/cmor-tables> {
-        ?var a data:Variable;
-            data:holdsSpecializationOfVariable* cf:air_temperature;
-            rdfs:label ?var_label.
-        OPTIONAL {
-            ?var rdfs:comment ?var_descr.
-        }
+    ?var a data:Variable;
+  		top:isMemberOf <https://w3id.org/hacid/data/cs/variables/mip>;
+        data:holdsSpecializationOfVariable* cf:air_temperature;
+        rdfs:label ?var_label.
+    OPTIONAL {
+        ?var rdfs:comment ?var_descr.
     }
     OPTIONAL {
 	    ?dataset data:holdsSpecializationOfVariable* ?var
@@ -118,20 +118,19 @@ PREFIX sector: <https://w3id.org/hacid/data/cs/climdex/sectors/>
 SELECT 
 	?index ?index_label ?index_descr ?index_dim ?index_definition
 WHERE {
-    GRAPH <https://w3id.org/hacid/data/cs/climdex> {
-        sector:Water%20resources%20and%20food%20security top:classifies ?index.
-        ?index a data:Variable;
-            rdfs:label ?index_label;
-        	data:derivedFromVariable ?from_variable.
-        OPTIONAL {
-            ?index rdfs:comment ?index_descr.
-        }
-        OPTIONAL {
-            ?index data:hasValuesOn ?index_dim.
-        }
-       	OPTIONAL {
-        	?index top:definition ?index_definition.
-        }
+    ?index a data:Variable;
+        top:isMemberOf <https://w3id.org/hacid/data/cs/climdex/indices>;
+        top:isClassifiedBy sector:Water%20resources%20and%20food%20security;
+        rdfs:label ?index_label;
+        data:derivedFromVariable ?from_variable.
+    OPTIONAL {
+        ?index rdfs:comment ?index_descr.
+    }
+    OPTIONAL {
+        ?index data:hasValuesOn ?index_dim.
+    }
+    OPTIONAL {
+        ?index top:definition ?index_definition.
     }
 }
 ORDER BY ?index
@@ -149,21 +148,19 @@ PREFIX top: <https://w3id.org/hacid/onto/top-level/>
 PREFIX ccso: <https://w3id.org/hacid/onto/ccso/>
 PREFIX data: <https://w3id.org/hacid/onto/data/>
 PREFIX rcp: <https://w3id.org/hacid/data/cs/scenarios/RCP/>
-PREFIX mip: <https://w3id.org/hacid/data/cs/variable/mip/>
-PREFIX dimension: <https://w3id.org/hacid/data/cs/dimension/>
+PREFIX mip: <https://w3id.org/hacid/data/cs/variables/mip/>
+PREFIX dimension: <https://w3id.org/hacid/data/cs/dimensions/>
 
 SELECT ?model ?simulation ?output ?geodeticResolution
 WHERE {
     ?simulation a ccso:Simulation;
         ccso:refersToScenario rcp:RCP4.5;
-        ccso:hasOutput ?output.
+        data:hasOutput ?output.
     ?output data:holdsSpecializationOfVariable* mip:tas;
     data:dependsOnVariable ?geodeticVariable.
     ?geodeticVariable
         data:holdsSpecializationOfVariable* dimension:geodetic;
-        data:hasDiscretization ?geodeticDiscretization.
-    ?geodeticDiscretization a data:RollingRegularGrid;
-    	data:hasResolutionValue ?geodeticResolution.
+        data:hasDiscretization/data:hasResolutionValue ?geodeticResolution.
 	FILTER(?geodeticResolution < 0.2)
 }
 ORDER BY ?model ?simulation ?output
@@ -179,20 +176,18 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX top: <https://w3id.org/hacid/onto/top-level/> 
 PREFIX ccso: <https://w3id.org/hacid/onto/ccso/>
 PREFIX data: <https://w3id.org/hacid/onto/data/>
-PREFIX mip: <https://w3id.org/hacid/data/cs/variable/mip/>
-PREFIX dimension: <https://w3id.org/hacid/data/cs/dimension/>
-PREFIX sim: <https://w3id.org/hacid/data/cs/simulation/>
+PREFIX mip: <https://w3id.org/hacid/data/cs/variables/mip/>
+PREFIX dimension: <https://w3id.org/hacid/data/cs/dimensions/>
+PREFIX sim: <https://w3id.org/hacid/data/cs/simulations/>
 
 SELECT ?dataset
 WHERE {
-    sim:cmip5.HadCM3.rcp45.r10i1p1 ccso:hasOutput/top:hasPart* ?dataset.
+    sim:cmip5.HadCM3.rcp45.r10i1p1 data:hasOutput/top:hasPart* ?dataset.
     ?dataset data:holdsSpecializationOfVariable* mip:tas;
     	data:dependsOnVariable ?temporalVariable.
 	?temporalVariable
         data:holdsSpecializationOfVariable* dimension:time;
-        data:hasDiscretization ?temporalDiscretization.
-    ?temporalDiscretization a data:RollingRegularGrid;
-    	data:hasResolutionValue "P1M"^^xsd:duration.
+        data:hasDiscretization/data:hasResolutionValue "P1M"^^xsd:duration.
 }
 ORDER BY ?dataset
 ```
@@ -207,16 +202,16 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX top: <https://w3id.org/hacid/onto/top-level/> 
 PREFIX ccso: <https://w3id.org/hacid/onto/ccso/>
 PREFIX data: <https://w3id.org/hacid/onto/data/>
-PREFIX mip: <https://w3id.org/hacid/data/cs/variable/mip/>
-PREFIX dimension: <https://w3id.org/hacid/data/cs/dimension/>
-PREFIX sim: <https://w3id.org/hacid/data/cs/simulation/>
+PREFIX mip: <https://w3id.org/hacid/data/cs/variables/mip/>
+PREFIX dimension: <https://w3id.org/hacid/data/cs/dimensions/>
+PREFIX sim: <https://w3id.org/hacid/data/cs/simulations/>
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 
 SELECT ?organization ?regional_model ?downscaling ?geodetic_region
 WHERE {
     ?downscaling ccso:isDownscalingOf sim:cmip5.HadGEM2-ES.rcp26.r1i1p1;
     	ccso:usesModel ?regional_model;
-         ccso:hasOutput/data:isSpecializedAccordingTo [
+         data:hasOutput/data:isSpecializedAccordingTo [
             data:isSpecializationOn/data:holdsSpecializationOfVariable* dimension:geodetic;
             data:hasSelectedRegion/geo:asWKT ?geodetic_region
         ].
@@ -225,3 +220,47 @@ WHERE {
 ORDER BY ?organization ?regional_model ?downscaling
 ```
 
+## Climate Service Workflow
+
+List all the defined operations, the possible plans to execute them, and the number of tasks the plans are composed of.
+
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX top: <https://w3id.org/hacid/onto/top-level/>
+
+SELECT 
+	?operation ?operation_label
+	?plan ?plan_label
+	(COUNT(?task) as ?num_tasks)
+WHERE {
+    ?operation a top:Operation;
+    	rdfs:label ?operation_label;
+    	top:isRealizedByPlan ?plan.
+    ?plan rdfs:label ?plan_label;
+    	top:definesTask ?task
+}
+GROUP BY
+	?operation ?operation_label
+	?plan ?plan_label
+ORDER BY
+	?operation ?plan
+```
+
+List tasks and subtasks of a specific plan (in this case a ClimateDataCollectionPlan), in order of precedence, alongside the optional output information role of each subtask.
+
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX top: <https://w3id.org/hacid/onto/top-level/>
+PREFIX plans: <https://w3id.org/hacid/data/cs/wf/plans/>
+
+SELECT 
+	?plan ?task ?task_label
+	(COUNT(DISTINCT ?following_task) AS ?num_following_tasks)
+WHERE {
+    plans:ClimateDataCollectionPlan top:definesTask ?task.
+    ?task rdfs:label ?task_label;
+        top:directlyPrecedes* ?following_task.
+}
+GROUP BY ?plan ?task ?task_label
+ORDER BY DESC(?num_following_tasks)
+```
