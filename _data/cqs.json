@@ -112,7 +112,7 @@
           "id": "list-hazard-types",
           "title": "List hazard types",
           "description": "List the climate hazard types, with the number of climate indices (from any catalogue) associated with each of them.",
-          "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX top: <https://w3id.org/hacid/onto/top-level/>\nPREFIX ccso: <https://w3id.org/hacid/onto/ccso/>\n\nSELECT\n    ?hazard ?hazard_label\n    (COUNT(DISTINCT ?index) AS ?num_indices)\nWHERE {\n    ?hazard a ccso:HazardType;\n        rdfs:label ?hazard_label.\n    OPTIONAL {\n        ?hazard top:associatedWith ?index.\n        ?index top:isMemberOf <https://w3id.org/hacid/data/cs/indices>.\n    }\n}\nGROUP BY ?hazard ?hazard_label\nORDER BY DESC(?num_indices) ?hazard\n"
+          "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX ccso: <https://w3id.org/hacid/onto/ccso/>\n\nSELECT\n    ?hazard ?hazard_label\n    (COUNT(DISTINCT ?index) AS ?num_indices)\nWHERE {\n    ?hazard a ccso:HazardType;\n        rdfs:label ?hazard_label.\n    OPTIONAL {\n        ?hazard ccso:hasIndicator ?index.\n    }\n}\nGROUP BY ?hazard ?hazard_label\nORDER BY DESC(?num_indices) ?hazard\n"
         }
       ]
     },
@@ -126,7 +126,7 @@
           "id": "list-hazard-indices",
           "title": "List indices for a hazard type",
           "description": "List the climate indices associated with a specific hazard type (in this case agricultural drought), organised by the catalogue that defines them.",
-          "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX top: <https://w3id.org/hacid/onto/top-level/>\nPREFIX data: <https://w3id.org/hacid/onto/data/>\nPREFIX hazard: <https://w3id.org/hacid/data/cs/hazard-types/>\n\nSELECT\n    ?catalogue ?index ?index_label ?index_descr\nWHERE {\n    hazard:AgriculturalDrought top:associatedWith ?index.\n    ?index a data:Variable;\n        top:isMemberOf ?catalogue;\n        rdfs:label ?index_label.\n    FILTER(?catalogue != <https://w3id.org/hacid/data/cs/indices>)\n    FILTER(STRENDS(STR(?catalogue), \"/indices\"))\n    OPTIONAL {\n        ?index rdfs:comment ?index_descr.\n    }\n}\nORDER BY ?catalogue ?index\n"
+          "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX top: <https://w3id.org/hacid/onto/top-level/>\nPREFIX data: <https://w3id.org/hacid/onto/data/>\nPREFIX ccso: <https://w3id.org/hacid/onto/ccso/>\nPREFIX hazard: <https://w3id.org/hacid/data/cs/hazard-types/>\n\nSELECT\n    ?catalogue ?index ?index_label ?index_descr\nWHERE {\n    hazard:AgriculturalDrought ccso:hasIndicator ?index.\n    ?index top:isMemberOf ?catalogue;\n        rdfs:label ?index_label.\n    FILTER(?catalogue != <https://w3id.org/hacid/data/cs/indices>)\n    OPTIONAL {\n        ?index rdfs:comment ?index_descr.\n    }\n}\nORDER BY ?catalogue ?index\n"
         }
       ]
     },
