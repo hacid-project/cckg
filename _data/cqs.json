@@ -15,10 +15,6 @@
     {
       "id": "workflow",
       "title": "Climate Service Workflow"
-    },
-    {
-      "id": "cases",
-      "title": "Climate Service Cases"
     }
   ],
   "competency_questions": [
@@ -259,36 +255,6 @@
           "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX top: <https://w3id.org/hacid/onto/top-level/>\nPREFIX methods: <https://w3id.org/hacid/data/cs/wf/methods/>\n\nSELECT\n    ?method ?method_label ?method_alt_label\nWHERE {\n    ?method a top:Method;\n        top:specializes methods:BiasCorrection;\n        rdfs:label ?method_label.\n    OPTIONAL {\n        ?method top:altLabel ?method_alt_label.\n    }\n}\nORDER BY ?method\n"
         }
       ]
-    },
-    {
-      "id": "CQ18",
-      "category": "workflow",
-      "title": "Plans realising an operation",
-      "question": "Which plans can be followed to perform a given operation, and of how many tasks is each plan composed?"
-    },
-    {
-      "id": "CQ19",
-      "category": "workflow",
-      "title": "Tasks of a plan",
-      "question": "Which tasks compose a given plan, in which order of precedence, and which information does each of them produce?"
-    },
-    {
-      "id": "CQ20",
-      "category": "cases",
-      "title": "Climate service cases",
-      "question": "Which climate service cases (executions of the climate service process) are recorded?"
-    },
-    {
-      "id": "CQ21",
-      "category": "cases",
-      "title": "Outputs of a case",
-      "question": "Which outputs have been produced by the actions performed in the workflow associated with a given climate service case?"
-    },
-    {
-      "id": "CQ22",
-      "category": "cases",
-      "title": "Simulations relevant to a case",
-      "question": "Which simulations are relevant to a given climate service case, i.e. refer to the selected emissions scenario and provide the selected variables?"
     }
   ]
 }
