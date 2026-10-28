@@ -18,7 +18,7 @@ The figures below refer to the current build of the knowledge graph, made by the
 | [CF Standard Name Table](https://cfconventions.org/Data/cf-standard-names/) | version 95 | 5,095 standard variables (600 aliases as alternative names) |
 | CMOR tables ([CMIP5](https://github.com/PCMDI/cmip5-cmor-tables), [CMIP6](https://github.com/PCMDI/cmip6-cmor-tables), [CMIP6Plus](https://github.com/PCMDI/mip-cmor-tables)) | current edition CMIP6Plus v6.5.0.4; 12 earlier editions for the previous variables | 1,323 MIP variables, 146 previous variables |
 | [Climdex/Climpact indices](https://www.climdex.org/learn/indices/) | table of the Climpact user guide (v3.2/v3.3), indices by sector of climdex.org | 63 indices, classified in 9 sectors |
-| Climate indices and hazards (curated in HACID) | — | 114 indices from ETCCDI (4), Climate-ADAPT (56), Copernicus C3S (6), UK-CRI (48); 42 hazard types, with 292 links to 109 indices |
+| Climate indices and hazards (curated in HACID) | — | 90 indices from ETCCDI (4), Climate-ADAPT (32, and 24 anomalies of them with respect to a baseline or as change), Copernicus C3S (6), UK-CRI (48); 42 hazard types, with 292 links to 109 indices |
 | Climate service process (curated in HACID) | — | 81 operations, 60 methods, 11 schemes of values |
 | Emissions scenarios and global warming levels | — | 8 RCPs and SRES A1B, 5 SSPs, 10 global warming levels (1.5 to 6 °C) |
 | CMIP5 experiments and institutions ([ESGF publisher configuration](https://github.com/ESGF/config)) | commit `dc19f5b` | 102 experiments, 26 institutions |
