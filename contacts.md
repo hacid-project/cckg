@@ -6,7 +6,7 @@ nav_order: 6
 
 # Contacts
 
-The Climate Change is developed and maintained in the context of the European project [HACID](https://www.hacid-project.eu/) and involving specifically (among all the project partners) the [Institute for Cognitive Sciences and Technologies (ISTC) of CNR, Italy](https://www.istc.cnr.it/) and the [MetOffice, UK](https://www.metoffice.gov.uk/).
+The Climate Change Knowledge Graph is developed and maintained in the context of the European project [HACID](https://www.hacid-project.eu/) and involving specifically (among all the project partners) the [Institute for Cognitive Sciences and Technologies (ISTC) of CNR, Italy](https://www.istc.cnr.it/) and the [MetOffice, UK](https://www.metoffice.gov.uk/).
 
 ## Project info and contacts
 
