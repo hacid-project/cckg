@@ -32,7 +32,24 @@ Example resource URIs:
 
 ## Download the Dumps
 
-At the DOI [10.6084/m9.figshare.29066711](https://dx.doi.org/10.6084/m9.figshare.29066711), snapshots of the entire knowledge graph will be periodically published, as N-Quads (one named graph per source, see [Content](content#named-graphs)).
+At the DOI [10.6084/m9.figshare.29066711](https://dx.doi.org/10.6084/m9.figshare.29066711), snapshots of the entire knowledge graph will be periodically published, as N-Quads.
+
+## Named Graphs
+
+The data of each source are in their own named graph, while the default graph of the SPARQL endpoint is the union of all of them:
+
+| Named graph | Content |
+|:------------|:--------|
+| `https://w3id.org/hacid/onto/top-level`, `https://w3id.org/hacid/onto/data`, `https://w3id.org/hacid/onto/ccso` | the ontologies |
+| `https://w3id.org/hacid/data/cs` | scenarios, global warming levels, dimensions, collections |
+| `https://w3id.org/hacid/data/cs/cf` | CF standard variables |
+| `https://w3id.org/hacid/data/cs/cmor-tables` | MIP variables |
+| `https://w3id.org/hacid/data/cs/climdex` | Climdex indices |
+| `https://w3id.org/hacid/data/cs/mohc-cvs` | other indices, hazard types, climate service operations and methods |
+| `https://w3id.org/hacid/data/cs/cmip5/cvs`, `https://w3id.org/hacid/data/cs/cmip5/datasets` | CMIP5 experiments, institutions, models, simulations and datasets |
+| `https://w3id.org/hacid/data/cs/cordex/cvs`, `https://w3id.org/hacid/data/cs/cordex-cmip5/datasets` | CORDEX domains, regional models, simulations and datasets |
+| `https://w3id.org/hacid/data/cs/ukcp18` | UKCP18 models, simulations and datasets |
+| `https://w3id.org/hacid/data/cs/indices`, `https://w3id.org/hacid/data/cs/variables` | collections of all the indices and variables |
 
 ## Build the Knowledge Graph
 
