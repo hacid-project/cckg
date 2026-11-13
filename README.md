@@ -1,6 +1,6 @@
 # cckg
 
-Documentation for the Climate Change Knowledge Graph of the HACID project, published at https://hacid-project.github.io/cckg/
+Documentation for the Climate Change Knowledge Graph (CCKG), published at https://hacid-project.github.io/cckg/ (permanent address: https://w3id.org/climate-change-kg).
 
 
 ## Competency questions and example queries
